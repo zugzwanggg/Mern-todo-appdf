@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import TodoItem from "../components/TodoItem"
+import { Link } from 'react-router-dom'
 
 interface ITodo {
   _id: string
@@ -33,7 +34,7 @@ const Layout = () => {
   
   return (
     <div className="p-8 bg-slate-500 rounded flex flex-col gap-10">
-      <button className="w-full bg-green-400 rounded p-2">Login</button>
+      <Link to='/login' className="w-full bg-green-400 rounded p-2 text-center">Login</Link>
       <form onSubmit={createTodo} className="w-full flex items-center">
         <input onChange={(e)=>setTitle(e.target.value)} className="p-2 text-black outline-none rounded-l w-full" type="text" />
         <button className="bg-gray-800 p-2 rounded-r">Add</button>
