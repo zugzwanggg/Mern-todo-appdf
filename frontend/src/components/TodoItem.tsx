@@ -29,6 +29,7 @@ const TodoItem = ({id,title,completed}: Props) => {
     .then(res=>console.log(res))
     .catch(err=> console.log(err))
     .finally(()=>setIsLoading(false))
+    location.reload()
   }
 
   const completeItem = (id:string, completed:boolean) => {
