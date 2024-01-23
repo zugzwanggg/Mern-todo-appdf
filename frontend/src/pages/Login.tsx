@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
-type Props = {}
 
-const Login = (props: Props) => {
+
+const Login = () => {
   return (
     <form className="bg-slate-500 p-4 w-96 flex flex-col gap-4 rounded text-gray-900">
       <h1 className="font-bold text-xl text-white">Login</h1>

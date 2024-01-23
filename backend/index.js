@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 dotenv.config()
 import { todoRouter } from "./routes/TodoRouter.js";
+import { authRouter } from "./routes/AuthRouter.js";
 
 
 
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/todo', todoRouter)
+app.use('/auth', authRouter)
 
 
 mongoose
