@@ -8,4 +8,4 @@ const TodoModel = new mongoose.Schema({
   }
 })
 
-export default mongoose.model('todolist', TodoModel)
+export default mongoose.model('todo', TodoModel)
