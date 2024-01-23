@@ -56,7 +56,7 @@ authRouter.post('/signup', async (req,res)=> {
 
     res.cookie("token", token, {
       httpOnly: true
-    });
+    }).send();
 
 
 
@@ -99,7 +99,7 @@ authRouter.post('/login', async (req,res)=> {
 
     res.cookie("token", token, {
       httpOnly: true
-    });
+    }).send();
 
 
 
@@ -118,3 +118,20 @@ authRouter.get('/logout', (req,res)=> {
   }).send();
 
 })
+
+authRouter.get('/loggedIn', async (req,res) => {
+  try {
+
+    const token = req.cookies.token
+
+    if (!token) return res.json(false)
+
+    jwt.verify(token, process.env.JWT_KEY);
+
+    res.json(true)
+
+  } catch(err) {
+    res.json(false)
+  }
+}
+)

@@ -2,44 +2,40 @@ import axios from 'axios'
 import {useState} from 'react'
 
 
+
 type Props = {
   id: string
   title: string
   completed: boolean
+  getItems: ()=>void;
 }
 
-const TodoItem = ({id,title,completed}: Props) => {
+const TodoItem = ({id,title,completed,getItems}: Props) => {
 
   const [edit,setEdit] = useState(false)
   const [newTitle,setNewTitle] = useState(title)
   const [isLoading,setIsLoading] = useState(false)
 
-  const deleteItem = (id:string) => {
+  const deleteItem = async (id:string) => {
     setIsLoading(true)
-    axios.delete('http://localhost:3000/todo/delete/'+id)
-    .then(res=> console.log(res))
-    .catch(err=> console.log(err))
-    .finally(()=>setIsLoading(false))
-    location.reload()
+    await axios.delete('http://localhost:3000/todo/delete/'+id)
+    setIsLoading(false)
+    getItems()
   }
 
-  const editItem = (id:string,title:string) => {
+  const editItem = async (id:string,title:string) => {
     setIsLoading(true)
     setEdit(false)
-    axios.put('http://localhost:3000/todo/edit/'+id, {title: title})
-    .then(res=>console.log(res))
-    .catch(err=> console.log(err))
-    .finally(()=>setIsLoading(false))
-    location.reload()
+    await axios.put('http://localhost:3000/todo/edit/'+id, {title: title})
+    setIsLoading(false)
+    getItems()
   }
 
-  const completeItem = (id:string, completed:boolean) => {
+  const completeItem = async(id:string, completed:boolean) => {
     setIsLoading(true)
-    axios.put('http://localhost:3000/todo/complete/'+id, {completed: completed})
-    .then(res=>console.log(res))
-    .catch(err=> console.log(err))
-    .finally(()=>setIsLoading(false))
-    location.reload()
+    await axios.put('http://localhost:3000/todo/complete/'+id, {completed: completed})
+    setIsLoading(false)
+    getItems()
   }
 
   return (

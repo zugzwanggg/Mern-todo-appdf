@@ -5,17 +5,22 @@ import dotenv from 'dotenv';
 dotenv.config()
 import { todoRouter } from "./routes/TodoRouter.js";
 import { authRouter } from "./routes/AuthRouter.js";
+import cookieParser from "cookie-parser";
 
 
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 const mongodb_uri = process.env.MONGODB_URI
 
 
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: ['http://localhost:4000'],
+  credentials: true
+}))
+app.use(cookieParser())
 
 app.use('/todo', todoRouter)
 app.use('/auth', authRouter)
