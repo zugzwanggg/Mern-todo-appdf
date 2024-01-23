@@ -1,9 +1,10 @@
 import { Router } from "express";
 import TodoModel from "../models/TodoModel.js";
+import checkAuth from "../middleware/checkAuth.js";
 
 export const todoRouter = Router()
 
-todoRouter.post('/create', async (req,res)=>{
+todoRouter.post('/create',checkAuth, async (req,res)=>{
   try {
     const title = req.body.title
     const createTodo = await TodoModel.create({
@@ -20,7 +21,7 @@ todoRouter.post('/create', async (req,res)=>{
   }
 })
 
-todoRouter.get('/items', async (req,res)=> {
+todoRouter.get('/items',checkAuth, async (req,res)=> {
   try {
     const items = await TodoModel.find()
 
@@ -35,7 +36,7 @@ todoRouter.get('/items', async (req,res)=> {
 })
 
 
-todoRouter.put('/edit/:id', async (req,res)=> {
+todoRouter.put('/edit/:id',checkAuth, async (req,res)=> {
   try {
     const id = req.params.id
     const editedTitle = req.body.title
@@ -52,7 +53,7 @@ todoRouter.put('/edit/:id', async (req,res)=> {
   }
 })
 
-todoRouter.put('/complete/:id', async (req,res)=> {
+todoRouter.put('/complete/:id',checkAuth, async (req,res)=> {
   try {
     const id = req.params.id
     const completed = req.body.completed
@@ -69,7 +70,7 @@ todoRouter.put('/complete/:id', async (req,res)=> {
   }
 })
 
-todoRouter.delete('/delete/:id', async (req,res)=> {
+todoRouter.delete('/delete/:id',checkAuth, async (req,res)=> {
   try {
     const id = req.params.id
     const deleteItem = await TodoModel.findByIdAndDelete({_id: id})

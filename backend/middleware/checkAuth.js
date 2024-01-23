@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-function checkAuth(req,res,next) {
+export default function checkAuth(req,res,next) {
   try {
 
     const token = req.cookies.token
@@ -12,6 +12,7 @@ function checkAuth(req,res,next) {
 
     req.user = verified.user
 
+    next()
 
   } catch(err) {
     console.log(err);
